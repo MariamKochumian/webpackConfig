@@ -1,3 +1,3 @@
 # webpackConfig
 webpack dev and prod configs
-webpack 4, babel 7
+(webpack 4, babel 7)
