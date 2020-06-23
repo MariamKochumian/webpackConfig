@@ -1,11 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
 const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   entry: {
-    app: './src/index/index.js',
+    app: './src/index/index.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -24,6 +25,9 @@ module.exports = {
   ],
   resolve: {
     modules: ['src', 'node_modules']
+    // plugins: [
+    //   new DirectoryNamedWebpackPlugin(true)
+    // ]
   },
   module: {
     rules: [
@@ -35,7 +39,7 @@ module.exports = {
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -43,7 +47,6 @@ module.exports = {
               url: true
             }
           },
-          'resolve-url-loader',
           {
             loader: 'sass-loader',
             options: {
