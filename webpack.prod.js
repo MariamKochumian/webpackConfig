@@ -1,15 +1,14 @@
 const merge = require('webpack-merge');
-const common = require('./webpack.common.js');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
   mode: 'production',
-  devtool: 'source-map',
   plugins: [
     new CleanWebpackPlugin(),
-    new UglifyJSPlugin(),
+    new TerserPlugin(),
     new CompressionPlugin({
       filename: '[path].gz[query]',
       algorithm: 'gzip',
@@ -17,4 +16,8 @@ module.exports = merge(common, {
       minRatio: 0.8
     })
   ],
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()]
+  }
 });
